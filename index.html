@@ -15,24 +15,29 @@
         }
 
         div {
-            width: 100px;
-            height: 100px;
-            margin-bottom: 10px;
+            display: inline-block;
+            width: 80px;
+            height: 80px;
+            margin-right: 10px;
             border-radius: 10px;
         }
 
-        #a {
+        #R {
             background-color: #f00;
         }
 
-        #b {
+        #G {
             background-color: #0f0;
         }
 
-        #c {
+        #B {
             background-color: #00f;
         }
 
+        label {
+            display: block;
+            margin-top: 100px;
+        }
 
         div.tap {
             box-shadow: 0 0 10px #666
@@ -46,28 +51,29 @@
     <script type="text/javascript" src="./lib/rx.time.js"></script>
 </head>
 <body>
-<div id="a"></div>
-<div id="b"></div>
-<div id="c"></div>
+<div id="R" name="red"></div>
+<div id="G" name="green" data-inset="10"></div>
+<div id="B" name="blue" data-inset="40"></div>
 <label for="name">tapped element</label><input type="text" disabled name="name" value="" id="name">
+    <script type="text/javascript" src="./lib/tap-lib.js"></script>
     <script type="text/javascript" src="./lib/tap.js"></script>
 <script type="text/javascript" charset="utf-8">
     var input = document.querySelector('input');
 
-    Taps.ping.subscribe(
+    Tap.pingTarget.subscribe(
         function (target) {
             target.classList.add('tap');
         }
     );
 
-    Taps.ped.subscribe(
+    Tap.pedTarget.subscribe(
         function (target) {
             target.classList.remove('tap');
             input.value = target.id;
         }
     );
 
-    Taps.cancel.subscribe(
+    Tap.cancelTarget.subscribe(
         function (target) {
             target.classList.remove('tap');
             input.value = 'CANCEL';
