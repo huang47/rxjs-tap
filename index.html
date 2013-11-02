@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="target-densitydpi=medium-dpi,width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <style type="text/css" media="">
+
+        body {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+        }
+
+        div {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+        }
+
+        #a {
+            background-color: #f00;
+        }
+
+        #b {
+            background-color: #0f0;
+        }
+
+        #c {
+            background-color: #00f;
+        }
+
+
+        div.tap {
+            box-shadow: 0 0 10px #666
+        }
+
+        
+    </style>
+    <title>Observable</title>
+    <script type="text/javascript" src="./lib/rx.js"></script>
+    <script type="text/javascript" src="./lib/rx.aggregates.js"></script>
+    <script type="text/javascript" src="./lib/rx.time.js"></script>
+</head>
+<body>
+<div id="a"></div>
+<div id="b"></div>
+<div id="c"></div>
+<label for="name">tapped element</label><input type="text" disabled name="name" value="" id="name">
+    <script type="text/javascript" src="./lib/tap.js"></script>
+<script type="text/javascript" charset="utf-8">
+    var input = document.querySelector('input');
+
+    Taps.ping.subscribe(
+        function (target) {
+            target.classList.add('tap');
+        }
+    );
+
+    Taps.ped.subscribe(
+        function (target) {
+            target.classList.remove('tap');
+            input.value = target.id;
+        }
+    );
+
+    Taps.cancel.subscribe(
+        function (target) {
+            target.classList.remove('tap');
+            input.value = 'CANCEL';
+        }
+    );
+</script>
+</body>
+</html>
